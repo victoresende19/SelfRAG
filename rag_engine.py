@@ -22,7 +22,7 @@ st.title("AutoRAG - Tire suas dúvidas sobre qualquer documento!")
 st.markdown(
     "Transforme a leitura de PDFs extensos em uma experiência dinâmica e interativa! "
     "Essa ferramenta permite que você extraia informações rapidamente, por meio da técnica RAG (Retrieval-Augmented Generation): basta fazer o upload do seu "
-    "documento e fazer perguntas sobre qualquer conteúdo. Simplifique sua análise de documentos - carregue seu PDF e comece a explorar! "
+    "documento e fazer perguntas sobre qualquer conteúdo."
 )
 st.markdown("Criado por Victor Augusto Souza Resende")
 
