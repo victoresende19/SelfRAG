@@ -16,7 +16,7 @@ OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 TMP_DIR = Path(__file__).resolve().parent.joinpath('data', 'tmp')
 TMP_DIR.mkdir(parents=True, exist_ok=True)
 
-st.set_page_config(page_title="RAG com Prompt RICES")
+st.set_page_config(page_title="AutoRAG - Pergunte ao seu PDF!")
 
 st.title("AutoRAG - Tire suas dúvidas sobre qualquer documento!")
 st.markdown(
