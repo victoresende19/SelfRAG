@@ -201,7 +201,7 @@ def process_documents():
         st.session_state.retriever = build_vectorstore(documents)
         st.success("Índice FAISS criado com sucesso!")
     except Exception as e:
-        st.error(f"Erro ao processar documentos: {e} ✨")
+        st.error(f"Erro ao processar documentos: {e} ")
 
 def boot():
     """
@@ -224,7 +224,7 @@ def boot():
             type=["pdf"],
             accept_multiple_files=True
         )
-        st.button("Processar Documentos", on_click=process_documents)
+        st.button("Processar Documentos ✨", on_click=process_documents)
 
     for user_msg, ai_msg in st.session_state.messages:
         st.chat_message("human").write(user_msg)
