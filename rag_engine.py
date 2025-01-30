@@ -24,7 +24,6 @@ st.markdown(
     "Essa ferramenta permite que você extraia informações rapidamente, por meio da técnica RAG (Retrieval-Augmented Generation): basta fazer o upload do seu "
     "documento e fazer perguntas sobre qualquer conteúdo. Simplifique sua análise de documentos - carregue seu PDF e comece a explorar! "
 )
-
 st.markdown("Criado por Victor Augusto Souza Resende")
 
 def load_documents():
