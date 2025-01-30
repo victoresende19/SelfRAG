@@ -221,8 +221,7 @@ def boot():
         st.session_state.source_docs = st.file_uploader(
             "Envie PDFs",
             type=["pdf"],
-            accept_multiple_files=True,
-            label="Upload de documentos"
+            accept_multiple_files=True
         )
         st.button("Processar Documentos", on_click=process_documents)
 
