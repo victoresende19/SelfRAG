@@ -22,9 +22,10 @@ st.title("AutoRAG - Tire suas dúvidas sobre qualquer documento!")
 st.markdown(
     "Transforme a leitura de PDFs extensos em uma experiência dinâmica e interativa! "
     "Essa ferramenta permite que você extraia informações rapidamente, por meio da técnica RAG (Retrieval-Augmented Generation): basta fazer o upload do seu "
-    "documento e fazer perguntas sobre qualquer conteúdo. Simplifique sua análise de documentos - carregue seu PDF e comece a explorar!"
-    "Criado por Victor Augusto Souza Resende"
+    "documento e fazer perguntas sobre qualquer conteúdo. Simplifique sua análise de documentos - carregue seu PDF e comece a explorar! "
 )
+
+st.markdown("Criado por Victor Augusto Souza Resende")
 
 def load_documents():
     """
@@ -201,7 +202,7 @@ def process_documents():
         st.session_state.retriever = build_vectorstore(documents)
         st.success("Índice FAISS criado com sucesso!")
     except Exception as e:
-        st.error(f"Erro ao processar documentos: {e}")
+        st.error(f"Erro ao processar documentos: {e} ✨")
 
 def boot():
     """
