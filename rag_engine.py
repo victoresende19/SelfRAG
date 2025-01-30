@@ -18,7 +18,7 @@ TMP_DIR.mkdir(parents=True, exist_ok=True)
 
 st.set_page_config(page_title="RAG com Prompt RICES")
 
-st.title("Self RAG - FAISS and OpenAI")
+st.title("AutoRAG - Tire suas dúvidas sobre qualquer documento!")
 st.markdown(
     "Transforme a leitura de PDFs extensos em uma experiência dinâmica e interativa! "
     "Nossa ferramenta inteligente permite que você extraia informações rapidamente: basta fazer o upload do seu "
