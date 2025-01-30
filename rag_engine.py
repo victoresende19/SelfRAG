@@ -21,7 +21,7 @@ st.set_page_config(page_title="RAG com Prompt RICES")
 st.title("AutoRAG - Tire suas dúvidas sobre qualquer documento!")
 st.markdown(
     "Transforme a leitura de PDFs extensos em uma experiência dinâmica e interativa! "
-    "Nossa ferramenta inteligente permite que você extraia informações rapidamente: basta fazer o upload do seu "
+    "Essa ferramenta permite que você extraia informações rapidamente, por meio da técnicas RAG (Retrieval-Augmented Generation): basta fazer o upload do seu "
     "documento e fazer perguntas sobre qualquer conteúdo. Simplifique sua análise de documentos - carregue seu PDF e comece a explorar!"
 )
 
