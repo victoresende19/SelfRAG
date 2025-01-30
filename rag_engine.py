@@ -101,7 +101,7 @@ def build_rices_prompt(context, chat_history, user_query):
     You are an expert on the document provided, with comprehensive knowledge of its content and the ability to analyze it contextually.
 
     **Instruction
-    Answer clearly, precisely and professionally, adapting your tone to the context of the question. Your answers should help us understand the document without unnecessary complications.
+    Answer clearly, precisely and professionally, adapting your tone to the context of the question. Your answers should help us understand the document without unnecessary complications. If you don't know the answer, say you don't know and ask for more information.
 
     **Context
     The question will be based on the document provided via upload. Relevant information will include:
