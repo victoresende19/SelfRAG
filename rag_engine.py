@@ -16,14 +16,10 @@ OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 TMP_DIR = Path(__file__).resolve().parent.joinpath('data', 'tmp')
 TMP_DIR.mkdir(parents=True, exist_ok=True)
 
-st.set_page_config(page_title="AutoRAG - Pergunte ao seu PDF!")
+st.set_page_config(page_title="PO Assistant - Crie histórias de usuário")
 
-st.title("AutoRAG - Tire suas dúvidas sobre qualquer documento!")
-st.markdown(
-    "Transforme a leitura de PDFs extensos em uma experiência dinâmica e interativa! "
-    "Essa ferramenta permite que você extraia informações rapidamente, por meio da técnica RAG (Retrieval-Augmented Generation): basta fazer o upload do seu "
-    "documento e fazer perguntas sobre qualquer conteúdo."
-)
+st.title("PO Assistant - Crie histórias de usuário!")
+st.markdown("Crie histórias do usuário precisas e alinhadas com sua documentação de forma inteligente. Nossa ferramenta utiliza RAG (Retrieval-Augmented Generation) para transformar sua base de conhecimento em um assistente de Product Owner especializado. Faça upload de documentações, requisitos ou contextos do projeto para receber sugestões contextualizadas para criar user stories!")
 st.markdown("Criado por Victor Augusto Souza Resende")
 
 def load_documents():
@@ -99,24 +95,32 @@ def build_rices_prompt(context, chat_history, user_query):
         Texto final do prompt pronto para ser utilizado no modelo.
     """
     prompt = f"""
-    You are an expert on the document provided, with comprehensive knowledge of its content and the ability to analyze it contextually.
-
+    **Role**
+    You are an experienced Assistant Product Owner, specialized in transforming business requirements into well-structured user stories. Your role is to analyze the context provided through relevant documents and information, and create user stories that follow agile best practices.
+    
     **Instruction
-    Answer clearly, precisely and professionally, adapting your tone to the context of the question. Your answers should help us understand the document without unnecessary complications. If you don't know the answer, say you don't know and ask for more information.
+    Answer clearly, precisely and professionally, adapting your tone to the context of the question.
 
-    **Context
-    The question will be based on the document provided via upload. Relevant information will include:
+    **Context**
+    To help with the creation of the user story, use the context of the following project documentation:
     {context}
 
-    **Explanation**
-    Provide detailed explanations based on the document, quoting specific sections or passages where relevant.
-    Help the user understand the principles and reasoning present in the text.
-    Include official references or complementary information when available in the document.
-    
-    **Attention
-    Maintain confidentiality and professionalism in all interactions.
-    Base your answers exclusively on the content of the document provided.
-    Always answer in Portuguese.
+
+    **Examples**
+    Q: Customers need an easy way to track their orders and receive real-time updates on delivery status.
+    A: I as an e-commerce customer, want to receive real-time updates on the status of my order so that I can schedule it and be more confident about the delivery. 
+       Acceptance Criteria: 
+       - The system should show the current status of the order; 
+       - The customer should receive push notifications with each update; 
+       - Tracking should show the current location of the order; 
+       - Status history should be available.
+
+    **Attention**
+    - Always follow the template of: Eu como usuário (author of the action - persona) quero (desired functionality) para (added value to the desired functionality).
+    - Considers stakeholder needs. Aligns stories with product strategy.
+    - Every user story should contain an explicit requirement for at least 3 items for metrics, acceptance criteria and risks
+    - Base your answers exclusively on the content of the document provided.
+    - Always answer in Portuguese.
 
     Chat history: 
     {chat_history}
