@@ -16,10 +16,10 @@ OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 TMP_DIR = Path(__file__).resolve().parent.joinpath('data', 'tmp')
 TMP_DIR.mkdir(parents=True, exist_ok=True)
 
-st.set_page_config(page_title="PO Assistant - Crie histórias de usuário")
+st.set_page_config(page_title="PO Assistant - Crie histórias de usuário", page_icon="🕵🏻")
 
 st.title("PO Assistant - Crie histórias de usuário!")
-st.markdown("Crie histórias do usuário precisas e alinhadas com sua documentação de forma inteligente. Nossa ferramenta utiliza RAG (Retrieval-Augmented Generation) para transformar sua base de conhecimento em um assistente de Product Owner especializado. Faça upload de documentações, requisitos ou contextos do projeto para receber sugestões contextualizadas para criar user stories!")
+st.markdown("A ferramenta utiliza RAG (Retrieval-Augmented Generation) para transformar sua base de conhecimento em um assistente de Product Owner especializado. Faça upload de documentações, requisitos ou contextos do projeto para receber sugestões contextualizadas para criar user stories!")
 st.markdown("Criado por Victor Augusto Souza Resende")
 
 def load_documents():
@@ -99,27 +99,21 @@ def build_rices_prompt(context, chat_history, user_query):
     You are an experienced Assistant Product Owner, specialized in transforming business requirements into well-structured user stories. Your role is to analyze the context provided through relevant documents and information, and create user stories that follow agile best practices.
     
     **Instruction
-    Answer clearly, precisely and professionally, adapting your tone to the context of the question.
+    Answer clearly, precisely and professionally, adapting your tone to the context of the question. Always write the user story with the IT technical needs, clearly explained for developers, data scientists or something related with the needs.
 
     **Context**
     To help with the creation of the user story, use the context of the following project documentation:
     {context}
 
-
     **Examples**
     Q: Customers need an easy way to track their orders and receive real-time updates on delivery status.
     A: I as an e-commerce customer, want to receive real-time updates on the status of my order so that I can schedule it and be more confident about the delivery. 
-       Acceptance Criteria: 
-       - The system should show the current status of the order; 
-       - The customer should receive push notifications with each update; 
-       - Tracking should show the current location of the order; 
-       - Status history should be available.
 
     **Attention**
     - Always follow the template of: Eu como usuário (author of the action - persona) quero (desired functionality) para (added value to the desired functionality).
-    - Considers stakeholder needs. Aligns stories with product strategy.
-    - Every user story should contain an explicit requirement for at least 3 items for metrics, acceptance criteria and risks
-    - Base your answers exclusively on the content of the document provided.
+    - Considers stakeholder needs, aligns stories with product strategy. 
+    - Every user story should contain an explicit requirement for at least 3 items for technical metrics, acceptance criteria (or requirements) and risks.
+    - Always write the user story with the IT technical needs, clearly explained for dev, data science or something related with the needs.
     - Always answer in Portuguese.
 
     Chat history: 
@@ -128,6 +122,7 @@ def build_rices_prompt(context, chat_history, user_query):
     Question: 
     {user_query}
     """
+
     return prompt.strip()
 
 def run_rices_query(retriever, user_query, context):
@@ -158,7 +153,7 @@ def run_rices_query(retriever, user_query, context):
     chat_history_str = format_chat_history(st.session_state.messages)
     docs = retriever.get_relevant_documents(user_query)
     docs_text = "\n".join([doc.page_content for doc in docs])
-    context_final = f"{context}\n\n[Documentos Relevantes]\n{docs_text}"
+    context_final = f"{context}[Documentos Relevantes]\n{docs_text}"
     final_prompt = build_rices_prompt(
         context=context_final,
         chat_history=chat_history_str,
@@ -167,7 +162,7 @@ def run_rices_query(retriever, user_query, context):
     llm = ChatOpenAI(
         openai_api_key=OPENAI_API_KEY,
         model_name="gpt-3.5-turbo",
-        temperature=0.0
+        temperature=0.2
     )
     response = llm.predict(final_prompt)
     st.session_state.messages.append((user_query, response))
@@ -223,6 +218,7 @@ def boot():
         st.session_state.messages = []
 
     with st.sidebar:
+        st.title("Documentações e contextos")
         st.session_state.source_docs = st.file_uploader(
             "Envie PDFs",
             type=["pdf"],
